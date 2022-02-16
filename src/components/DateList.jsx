@@ -4,9 +4,7 @@ import { useSelector } from 'react-redux';
 
 const DateList = () => {
   const dates = useSelector((state) => state)
-
-  console.log(dates)
-
+  
   return (
   <>
   <h2>Date List</h2>

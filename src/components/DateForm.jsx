@@ -1,19 +1,18 @@
-import { produceWithPatches } from 'immer';
-import React, {useState, useEffect} from 'react';
-// https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
-// https://dev.to/jleewebdev/using-the-usestate-hook-and-working-with-forms-in-react-js-m6b
+import React, {useState} from 'react';
+
 const DateForm = (props) => {
   const initialState = {
-    title: '',
-    body: '',
-    notes: '',
+    title: 'What happened?',
+    body: 'Add a short description',
+    notes: 'Links and additional notes',
     startDate: 'YYYY/MM/DD',
-    endDate:0,
+    endDate:'YYYY/MM/DD',
   }
 
-  const [title, setTitle] = useState()
-  const [body, setBody] = useState()
-  const [startDate, setStartDate] = useState('YYYY/XX/DD')
+  const [title, setTitle] = useState(initialState.title)
+  const [body, setBody] = useState(initialState.body)
+  const [startDate, setStartDate] = useState(initialState.startDate)
+  const [endDate, setEndDate] = useState(initialState.endDate)
 
   const onTitleChange = (e) => {
     const title = e.target.value
@@ -28,6 +27,11 @@ const DateForm = (props) => {
   const onStartDateChange = (e) => {
     const startDate = e.target.value
     setStartDate(startDate)
+  }
+
+   const onEndDateChange = (e) => {
+    const endDate = e.target.value
+    setEndDate(endDate)
   }
 
   const onSubmit = (e) => {
@@ -49,6 +53,7 @@ const DateForm = (props) => {
       onChange={onTitleChange}
       type="text" name="title"
       id="title"
+      placeholder={title}
     />
     <label htmlFor="body">Body</label>
     <input
@@ -56,6 +61,7 @@ const DateForm = (props) => {
       type="text"
       name="body"
       id="body"
+      placeholder={body}
     />
     <label htmlFor="startdate">Start date</label>
     <input
@@ -63,6 +69,14 @@ const DateForm = (props) => {
       type="text"
       name="startdate"
       id="startdate"
+      placeholder={startDate}
+    />
+    <label htmlFor="enddate">End date</label>
+    <input
+      onChange={onEndDateChange}
+      type="text"
+      name="enddate"
+      id="enddate"
       placeholder={startDate}
     />
     <button type="submit">Submit</button>

@@ -1,10 +1,8 @@
 import React from 'React';
 import { deleteDate } from '../store/actions/dates';
-import { useSelector } from 'react-redux';
 import { dateStore } from '../store/store/configStore';
 
 const DateItem = (props) => {
-  // const dates = useSelector((state) => state)
   
   return (
   <div className="date-item">

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { DateTime } from 'luxon';
 
 const DateForm = (props) => {
   const initialState = {
@@ -6,7 +7,7 @@ const DateForm = (props) => {
     body: 'Add a short description',
     notes: 'Links and additional notes',
     startDate: 'YYYY/MM/DD',
-    endDate:'YYYY/MM/DD',
+    endDate:'',
   }
 
   const [title, setTitle] = useState(initialState.title)
@@ -36,10 +37,13 @@ const DateForm = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const startDateArray = startDate.split('-').map(e => +e)
+    const endDateArray = endDate ? endDate.split('-').map(e => +e) : startDateArray
     props.onSubmit({
       title,
       body,
-      startDate
+      startDate: DateTime.local(...startDateArray),
+      endDate: DateTime.local(...endDateArray)
     })
   }
   
@@ -77,7 +81,7 @@ const DateForm = (props) => {
       type="text"
       name="enddate"
       id="enddate"
-      placeholder={startDate}
+      placeholder={'YYYY-MM-DD'}
     />
     <button type="submit">Submit</button>
   </form>

@@ -8,7 +8,9 @@ const DateItem = (props) => {
   <div className="date-item">
     <p className="date">
       <b>
-    {props.startDate.toFormat('yyyy/MM/dd')}
+    {props.startDate.year}
+    {props.withMonth && '/' + props.startDate.month.toString().padStart(2,'0')}
+    {props.withDay && '/' + props.startDate.day.toString().padStart(2,'0')}
     {!props.startDate.hasSame(props.endDate, "day") && <span>&#8211;</span>}
     {!props.startDate.hasSame(props.endDate, "year") && props.endDate.year + '/'}
     {!props.startDate.hasSame(props.endDate, "month") && props.endDate.month.toString().padStart(2,'0') + '/'}

@@ -38,12 +38,19 @@ const DateForm = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const startDateArray = startDate.split('-').map(e => +e)
+    console.log(startDateArray.length)
+    const withDay = startDateArray.length === 3;
+    const withMonth = startDateArray.length >= 2;
+    console.log(withDay ? 'with day': 'without day')
+    console.log(withMonth? 'only month:' : 'without month')
     const endDateArray = endDate ? endDate.split('-').map(e => +e) : startDateArray
     props.onSubmit({
       title,
       body,
       startDate: DateTime.local(...startDateArray),
-      endDate: DateTime.local(...endDateArray)
+      endDate: DateTime.local(...endDateArray),
+      withDay,
+      withMonth
     })
   }
   

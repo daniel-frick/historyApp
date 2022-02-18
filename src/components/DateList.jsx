@@ -3,7 +3,7 @@ import DateItem from './DateItem';
 import { useSelector } from 'react-redux';
 
 const DateList = () => {
-  const dates = useSelector((state) => state)
+  const dates = useSelector(state => state)
   
   return (
   <>

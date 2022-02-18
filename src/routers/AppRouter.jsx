@@ -11,6 +11,7 @@ import ConnectedDateList from '../components/DateList';
 import Navigation from '../components/Navigation';
 import Header from '../components/Header';
 import Home from '../components/Home';
+import EditDate from '../components/EditDate';
 
 const AppRouter = () => (
 <BrowserRouter>
@@ -21,6 +22,7 @@ const AppRouter = () => (
       <Route index element={<Home />} />
       <Route path="new" element={<AddDate />} />
       <Route path="list" element={<ConnectedDateList />} />
+      <Route path="edit/:id" element={<EditDate />} />
 
   </Routes>
 </BrowserRouter>

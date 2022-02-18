@@ -3,11 +3,11 @@ import { DateTime } from 'luxon';
 
 const DateForm = (props) => {
   const initialState = {
-    title: 'What happened?',
-    body: 'Add a short description',
+    title: props.title ? props.title : 'What happened?',
+    body: props.body ? props.body : 'Add a short description',
     notes: 'Links and additional notes',
-    startDate: 'YYYY/MM/DD',
-    endDate:'',
+    startDate: props.startDate ? props.startDate.toString() : 'YYYY/MM/DD',
+    endDate: props.endDate ? props.endDate.toString() : 'YYYY/MM/DD',
   }
 
   const [title, setTitle] = useState(initialState.title)
@@ -41,8 +41,6 @@ const DateForm = (props) => {
     console.log(startDateArray.length)
     const withDay = startDateArray.length === 3;
     const withMonth = startDateArray.length >= 2;
-    console.log(withDay ? 'with day': 'without day')
-    console.log(withMonth? 'only month:' : 'without month')
     const endDateArray = endDate ? endDate.split('-').map(e => +e) : startDateArray
     props.onSubmit({
       title,
@@ -88,7 +86,7 @@ const DateForm = (props) => {
       type="text"
       name="enddate"
       id="enddate"
-      placeholder={'YYYY-MM-DD'}
+      placeholder={endDate}
     />
     <button type="submit">Submit</button>
   </form>

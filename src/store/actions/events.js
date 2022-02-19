@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export const deleteDate = (id) => ({
-  type: 'DELETE_DATE',
+export const deleteEvent = (id) => ({
+  type: 'DELETE_EVENT',
   id
 })
 
-export const addDate = (
+export const addEvent = (
   {
     title = '',
     body = '',
@@ -18,8 +18,8 @@ export const addDate = (
     withEndMonth = true
   } = {}
 ) => ({
-  type: 'ADD_DATE',
-  date: {
+  type: 'ADD_EVENT',
+  event: {
     id: uuidv4(),
     startDate,
     endDate,
@@ -35,8 +35,8 @@ export const addDate = (
 }
 )
 
-export const editDate = (id, updates) => ({
-  type: 'EDIT_DATE',
+export const editEvent = (id, updates) => ({
+  type: 'EDIT_EVENT',
   id,
   updates
 })

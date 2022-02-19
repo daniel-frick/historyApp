@@ -6,12 +6,12 @@ import {
   Route
 } from "react-router-dom";
 
-import AddDate from '../components/AddDate';
-import ConnectedDateList from '../components/DateList';
+import AddEventPage from '../components/AddEventPage';
+import ConnectedEventList from '../components/EventListPage';
 import Navigation from '../components/Navigation';
 import Header from '../components/Header';
 import Home from '../components/Home';
-import EditDate from '../components/EditDate';
+import EditEventPage from '../components/EditEventPage';
 
 const AppRouter = () => (
 <BrowserRouter>
@@ -20,9 +20,9 @@ const AppRouter = () => (
   <Routes>
    
       <Route index element={<Home />} />
-      <Route path="new" element={<AddDate />} />
-      <Route path="list" element={<ConnectedDateList />} />
-      <Route path="edit/:id" element={<EditDate />} />
+      <Route path="new" element={<AddEventPage />} />
+      <Route path="list" element={<ConnectedEventList />} />
+      <Route path="edit/:id" element={<EditEventPage />} />
 
   </Routes>
 </BrowserRouter>

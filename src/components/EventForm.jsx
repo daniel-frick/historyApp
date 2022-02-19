@@ -3,13 +3,13 @@ import { DateTime } from 'luxon';
 import {getSingleStartDate, getSingleEndDate} from '../utils/displayfunctions';
 const dateFormat = 'YYYY/MM/DD'
 
-const DateForm = (props) => {
+const EventForm = (props) => {
   const initialState = {
-    title: props.dateObject ? props.dateObject.title : '',
-    body: props.dateObject ? props.dateObject.body : '',
+    title: props.eventObject ? props.eventObject.title : '',
+    body: props.eventObject ? props.eventObject.body : '',
     notes: 'Links and additional notes',
-    startDate: props.dateObject ? getSingleStartDate(props.dateObject) : '',
-    endDate: props.dateObject ? getSingleEndDate(props.dateObject) : '',
+    startDate: props.eventObject ? getSingleStartDate(props.eventObject) : '',
+    endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   }
 
   const [title, setTitle] = useState(initialState.title)
@@ -59,8 +59,6 @@ const DateForm = (props) => {
   
   return (
   <>
-  <h2>Date Form</h2>
-
   <form className="formfields" onSubmit={onSubmit}>
     <label htmlFor="title">Title</label>
     <input
@@ -104,4 +102,4 @@ const DateForm = (props) => {
 )}
 
 
-export default DateForm
+export default EventForm

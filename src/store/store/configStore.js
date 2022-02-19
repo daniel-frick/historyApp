@@ -1,4 +1,4 @@
 import {createStore} from 'redux';
-import {dateReducer} from '../reducers/dateReducer'
-import '../reducers/dateReducer';
-export const dateStore = createStore(dateReducer);
+import {eventReducer} from '../reducers/eventReducer'
+import '../reducers/eventReducer';
+export const eventStore = createStore(eventReducer);

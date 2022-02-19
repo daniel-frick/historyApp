@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import { DateTime } from 'luxon';
+import {getSingleStartDate, getSingleEndDate} from '../utils/displayfunctions';
+const dateFormat = 'YYYY/MM/DD'
 
 const DateForm = (props) => {
   const initialState = {
-    title: props.title ? props.title : 'What happened?',
-    body: props.body ? props.body : 'Add a short description',
+    title: props.dateObject ? props.dateObject.title : 'What happened?',
+    body: props.dateObject ? props.dateObject.body : 'Add a short description',
     notes: 'Links and additional notes',
-    startDate: props.startDate ? props.startDate.toString() : 'YYYY/MM/DD',
-    endDate: props.endDate ? props.endDate.toString() : 'YYYY/MM/DD',
+    startDate: props.dateObject ? getSingleStartDate(props.dateObject) : dateFormat,
+    endDate: props.dateObject ? getSingleEndDate(props.dateObject) : dateFormat,
   }
 
   const [title, setTitle] = useState(initialState.title)
@@ -37,19 +39,22 @@ const DateForm = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const startDateArray = startDate.split('-').map(e => +e)
-    console.log(startDateArray.length)
-    const withDay = startDateArray.length === 3;
-    const withMonth = startDateArray.length >= 2;
-    const endDateArray = endDate ? endDate.split('-').map(e => +e) : startDateArray
+    const startDateArray = startDate.split('/').map(e => +e)
+    const endDateArray = endDate !== dateFormat ? endDate.split('/').map(e => +e) : startDateArray
+    const withStartDay = startDateArray.length === 3;
+    const withStartMonth = startDateArray.length >= 2;
+    const withEndDay = endDateArray.length === 3;
+    const withEndMonth = endDateArray.length >= 2;
     props.onSubmit({
       title,
       body,
       startDate: DateTime.local(...startDateArray),
       endDate: DateTime.local(...endDateArray),
-      withDay,
-      withMonth
-    })
+      withStartDay,
+      withStartMonth,
+      withEndDay,
+      withEndMonth
+      })
   }
   
   return (

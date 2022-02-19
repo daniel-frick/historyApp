@@ -10,7 +10,7 @@ const events = ['Normalisierung mit VAE', 'Regierungsbildung Bennett', 'Lapid ü
 for (let i = 1; i <= 3; i++) {
   dateStore.dispatch(addDate({
   startDate: DateTime.local(2012,i+5,i),
-  endDate:DateTime.local(2012,i+7,i+2),
+  endDate:DateTime.local(2012+i,i+7,i+2),
   title: events[i-1],
   body: 'body: ' + i,
   footnotes: 'no footnotes: ' + i

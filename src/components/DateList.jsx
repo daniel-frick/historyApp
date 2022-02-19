@@ -16,6 +16,3 @@ const DateList = () => {
 }
 
 export default DateList
-// const mapStateToProps = (state) => ({dates: state})
-
-// export default connect(mapStateToProps)(DateList) 

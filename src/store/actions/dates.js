@@ -11,8 +11,10 @@ export const addDate = (
     startDate = '',
     endDate = '',
     footnotes = '',
-    withDay = true,
-    withMonth = true
+    withStartDay = true,
+    withStartMonth = true,
+    withEndDay = true,
+    withEndMonth = true
   } = {}
 ) => ({
   type: 'ADD_DATE',
@@ -23,8 +25,10 @@ export const addDate = (
     title,
     body,
     footnotes,
-    withMonth,
-    withDay,
+    withStartMonth,
+    withStartDay,
+    withEndMonth,
+    withEndDay,
     added: new Date()
   }
 }

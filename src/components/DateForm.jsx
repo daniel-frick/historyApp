@@ -5,11 +5,11 @@ const dateFormat = 'YYYY/MM/DD'
 
 const DateForm = (props) => {
   const initialState = {
-    title: props.dateObject ? props.dateObject.title : 'What happened?',
-    body: props.dateObject ? props.dateObject.body : 'Add a short description',
+    title: props.dateObject ? props.dateObject.title : '',
+    body: props.dateObject ? props.dateObject.body : '',
     notes: 'Links and additional notes',
-    startDate: props.dateObject ? getSingleStartDate(props.dateObject) : dateFormat,
-    endDate: props.dateObject ? getSingleEndDate(props.dateObject) : dateFormat,
+    startDate: props.dateObject ? getSingleStartDate(props.dateObject) : '',
+    endDate: props.dateObject ? getSingleEndDate(props.dateObject) : '',
   }
 
   const [title, setTitle] = useState(initialState.title)
@@ -67,7 +67,8 @@ const DateForm = (props) => {
       onChange={onTitleChange}
       type="text" name="title"
       id="title"
-      placeholder={title}
+      placeholder={'What happened?'}
+      value={title}
     />
     <label htmlFor="body">Body</label>
     <input
@@ -75,7 +76,8 @@ const DateForm = (props) => {
       type="text"
       name="body"
       id="body"
-      placeholder={body}
+      placeholder={'Add a short description'}
+      value={body}
     />
     <label htmlFor="startdate">Start date</label>
     <input
@@ -83,7 +85,8 @@ const DateForm = (props) => {
       type="text"
       name="startdate"
       id="startdate"
-      placeholder={startDate}
+      placeholder={dateFormat}
+      value={startDate}
     />
     <label htmlFor="enddate">End date</label>
     <input
@@ -91,7 +94,8 @@ const DateForm = (props) => {
       type="text"
       name="enddate"
       id="enddate"
-      placeholder={endDate}
+      placeholder={dateFormat}
+      value={endDate}
     />
     <button type="submit">Submit</button>
   </form>

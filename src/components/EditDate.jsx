@@ -1,12 +1,11 @@
 import React from 'react';
-import { addDate } from '../store/actions/dates';
+import { editDate } from '../store/actions/dates';
 import DateForm from './DateForm'
 import { dateStore } from '../store/store/configStore';
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 const EditDate = () => {
-  // 857819f9-b367-4741-a6fa-13122f9a377f
   const {id} = useParams()
   const dateObject= useSelector(state => state).find(dateObject => dateObject.id === id)
 
@@ -17,7 +16,7 @@ const EditDate = () => {
   <p>{dateObject.title}</p>
   <DateForm
     dateObject={dateObject}
-    onSubmit={console.log('form from edit page')} />
+    onSubmit={(data) => dateStore.dispatch(editDate(id, data))} />
   </>
 )}
 

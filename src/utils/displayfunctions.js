@@ -16,7 +16,7 @@ export const getSingleEndDate = (props) => {
   if (props.withEndMonth) {
     dateString += '/' + props.endDate.month.toString().padStart(2,'0')
   }
-  
+
   if (props.withEndDay) {
     dateString += '/' + props.endDate.day.toString().padStart(2,'0')
   }
@@ -32,13 +32,13 @@ export const getFullDateString = (props) => {
       fullDateString += String.fromCharCode(0x2013)
     }
     if (!props.startDate.hasSame(props.endDate, "year")) {
-      fullDateString += props.endDate.year.toString() + '/'
+      fullDateString += props.endDate.year.toString()
     }
-    if (!props.startDate.hasSame(props.endDate, "month")) {
-      fullDateString += props.endDate.month.toString().padStart(2,'0') + '/'
+    if (!props.startDate.hasSame(props.endDate, "month") && props.withEndMonth) {
+      fullDateString += '/' + props.endDate.month.toString().padStart(2,'0')
     }
-    if (!props.startDate.hasSame(props.endDate, "day")) {
-      fullDateString += props.endDate.day.toString().padStart(2,'0')
+    if (!props.startDate.hasSame(props.endDate, "day") && props.withEndDay) {
+      fullDateString += '/' + props.endDate.day.toString().padStart(2,'0')
     }
     return fullDateString
   }

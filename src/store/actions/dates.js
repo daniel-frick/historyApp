@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+
 export const deleteDate = (id) => ({
   type: 'DELETE_DATE',
   id
@@ -33,3 +34,9 @@ export const addDate = (
   }
 }
 )
+
+export const editDate = (id, updates) => ({
+  type: 'EDIT_DATE',
+  id,
+  updates
+})

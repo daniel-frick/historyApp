@@ -24,23 +24,22 @@ const EventForm = (props) => {
   const [endDate, setEndDate] = useState(initialState.endDate)
   const [validStartDate, setValidStartDate] = useState(false)
   const [validEndDate, setValidEndDate] = useState(true)
+  const [error, setError] = useState('')
 
   const verifyStartDate = (input) => {
   if (input.match(regexDateFormat)) {
     setValidStartDate(true);
   } else {
     setValidStartDate(false)
-    console.log('invalid start date')
   }
 } 
  const verifyEndDate = (input) => {
   
   if (input === '' || input.match(regexDateFormat)) {
     setValidEndDate(true)
-    console.log('valid end date')
+
   } else {
     setValidEndDate(false)
-    console.log('invalid end date')
   }
 } 
 
@@ -74,20 +73,29 @@ const EventForm = (props) => {
     const withStartMonth = startDateArray.length >= 2;
     const withEndDay = endDateArray.length === 3;
     const withEndMonth = endDateArray.length >= 2;
-    props.onSubmit({
-      title,
-      body,
-      startDate: DateTime.local(...startDateArray),
-      endDate: DateTime.local(...endDateArray),
-      withStartDay,
-      withStartMonth,
-      withEndDay,
-      withEndMonth
-      })
-  }
+    const generatedStartDate = DateTime.local(...startDateArray)
+    const generatedEndDate = DateTime.local(...endDateArray)
+    if (!generatedStartDate.isValid || !generatedEndDate.isValid) {
+      setError('you have entered invalid date format, please check again')
+    } else if (generatedStartDate.startOf('day') > generatedEndDate.startOf('day')) {
+      setError('The start date comes after the end date, please check your input.')
+    } else {
+      props.onSubmit({
+        title,
+        body,
+        startDate: generatedStartDate,
+        endDate: generatedEndDate,
+        withStartDay,
+        withStartMonth,
+        withEndDay,
+        withEndMonth
+        })
+      }
+    }
   
   return (
   <>
+  
   <form className="formfields" onSubmit={onSubmit}>
     <label htmlFor="title">Title</label>
     <input
@@ -108,7 +116,7 @@ const EventForm = (props) => {
     />
     <label htmlFor="startdate">Start date</label>
     <input
-      className={validStartDate ? "date-input" : "error"}
+      className={validStartDate ? "date-input" : "date-input error"}
       onChange={onStartDateChange}
       type="text"
       name="startdate"
@@ -128,6 +136,7 @@ const EventForm = (props) => {
     />
     <button disabled={!title || !validEndDate || !validStartDate} type="submit">Submit</button>
   </form>
+  {error && <p>{error}</p>}
   
   </>
 )}

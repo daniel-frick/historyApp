@@ -18,8 +18,10 @@ body {
 }
 
 .date-input {
-  color: chartreuse;
+  color: black;
+  font-weight: bold;
+  transition: all 3s ease-in;
 }
 .error {
-  color: red;
+  color: indianred;
 }

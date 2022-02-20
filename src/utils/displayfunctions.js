@@ -31,6 +31,15 @@ export const getFullDateString = (props) => {
     if (!props.startDate.hasSame(props.endDate, "day")) {
       fullDateString += String.fromCharCode(0x2013)
     }
+
+    if (props.startDate.hasSame(props.endDate, "year") && !props.withEndMonth) {
+      fullDateString += props.endDate.year.toString()
+    }
+
+    if (props.startDate.hasSame(props.endDate, "year") && props.withEndMonth && !props.withEndDay) {
+      fullDateString += props.endDate.year.toString()
+    }
+
     if (!props.startDate.hasSame(props.endDate, "year")) {
       fullDateString += props.endDate.year.toString()
     }

@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import { DateTime } from 'luxon';
 import {getSingleStartDate, getSingleEndDate} from '../utils/displayfunctions';
 const dateFormat = 'YYYY/MM/DD'
+let regexDateFormat = /^\d{1,4}(?=($|(\/\d{2}$)|((\/\d{2}){2}$)))/;
+
+// 
 
 const EventForm = (props) => {
   const initialState = {
@@ -12,10 +15,34 @@ const EventForm = (props) => {
     endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   }
 
+// ^(?:\d{1,4})(?=($|\/\d{2}))\/\d{2}?(?=(\/\d{2}$|$))
+// ^\d{1,4}(?=($|(\/\d{2}$)|((\/\d{2}){2}$)))
+
   const [title, setTitle] = useState(initialState.title)
   const [body, setBody] = useState(initialState.body)
   const [startDate, setStartDate] = useState(initialState.startDate)
   const [endDate, setEndDate] = useState(initialState.endDate)
+  const [validStartDate, setValidStartDate] = useState(false)
+  const [validEndDate, setValidEndDate] = useState(true)
+
+  const verifyStartDate = (input) => {
+  if (input.match(regexDateFormat)) {
+    setValidStartDate(true);
+  } else {
+    setValidStartDate(false)
+    console.log('invalid start date')
+  }
+} 
+ const verifyEndDate = (input) => {
+  
+  if (input === '' || input.match(regexDateFormat)) {
+    setValidEndDate(true)
+    console.log('valid end date')
+  } else {
+    setValidEndDate(false)
+    console.log('invalid end date')
+  }
+} 
 
   const onTitleChange = (e) => {
     const title = e.target.value
@@ -28,19 +55,21 @@ const EventForm = (props) => {
   }
 
   const onStartDateChange = (e) => {
-    const startDate = e.target.value
-    setStartDate(startDate)
+    const startDate = e.target.value;
+    verifyStartDate(startDate)
+    setStartDate(startDate);
   }
 
-   const onEndDateChange = (e) => {
-    const endDate = e.target.value
-    setEndDate(endDate)
+  const onEndDateChange = (e) => {
+  const endDate = e.target.value
+  verifyEndDate(endDate)
+  setEndDate(endDate)
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
     const startDateArray = startDate.split('/').map(e => +e)
-    const endDateArray = endDate !== dateFormat ? endDate.split('/').map(e => +e) : startDateArray
+    const endDateArray = endDate ? endDate.split('/').map(e => +e) : startDateArray
     const withStartDay = startDateArray.length === 3;
     const withStartMonth = startDateArray.length >= 2;
     const withEndDay = endDateArray.length === 3;
@@ -79,6 +108,7 @@ const EventForm = (props) => {
     />
     <label htmlFor="startdate">Start date</label>
     <input
+      className={validStartDate ? "date-input" : "error"}
       onChange={onStartDateChange}
       type="text"
       name="startdate"
@@ -88,6 +118,7 @@ const EventForm = (props) => {
     />
     <label htmlFor="enddate">End date</label>
     <input
+      className={validEndDate ? "date-input" : "error"}
       onChange={onEndDateChange}
       type="text"
       name="enddate"
@@ -95,7 +126,7 @@ const EventForm = (props) => {
       placeholder={dateFormat}
       value={endDate}
     />
-    <button type="submit">Submit</button>
+    <button disabled={!title || !validEndDate || !validStartDate} type="submit">Submit</button>
   </form>
   
   </>

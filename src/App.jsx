@@ -2,7 +2,7 @@ import React from 'react';
 import AppRouter from './routers/AppRouter';
 import { Provider } from 'react-redux';
 import { addEvent } from './store/actions/events'
-import { eventStore } from './store/store/configStore';
+import {eventStore}  from './store/store/configStore';
 import { DateTime } from 'luxon';
 
 const events = ['Normalisierung mit VAE', 'Regierungsbildung Bennett', 'Lapid übernimmt']

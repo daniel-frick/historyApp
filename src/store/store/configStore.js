@@ -1,4 +1,9 @@
-import {createStore} from 'redux';
-import {eventReducer} from '../reducers/eventReducer'
-import '../reducers/eventReducer';
-export const eventStore = createStore(eventReducer);
+import {createStore, combineReducers} from 'redux';
+import events from '../reducers/eventReducer'
+import filters from '../reducers/filterReducer'
+
+export const eventStore = createStore(
+  combineReducers({
+    events,
+    filters
+  }))

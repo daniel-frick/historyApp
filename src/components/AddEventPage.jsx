@@ -4,7 +4,7 @@ import EventForm from './EventForm'
 import { eventStore } from '../store/store/configStore';
 import { useNavigate } from 'react-router-dom'
 
-const AddEvent = () => {
+const AddEventPage = () => {
   let navigate = useNavigate()
   return(
   <>
@@ -18,4 +18,4 @@ const AddEvent = () => {
 )
   }
 
-export default AddEvent
+export default AddEventPage

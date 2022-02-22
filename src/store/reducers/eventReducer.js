@@ -1,6 +1,6 @@
 const eventsDefaultState = []
 
-export const eventReducer = (state = eventsDefaultState, action) => {
+export default (state = eventsDefaultState, action) => {
   switch (action.type) {
     case 'ADD_EVENT':
       return state.concat(action.event)

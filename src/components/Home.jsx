@@ -1,17 +1,28 @@
 import React from 'react';
-import {DateTime} from 'luxon';
+import { useSelector } from 'react-redux';
+import {setTextFilter} from '../store/actions/filters';
+import {eventStore} from '../store/store/configStore';
+
+
 
 const Home = () => {
+  const state = useSelector(state => state)
+  
 
-  const date = DateTime.local(2022,2,2)
-  const daysInMonth = date.daysInMonth
+  const onSubmit = (e) => {
+    e.preventDefault();
+    eventStore.dispatch(setTextFilter(e.target.textfilter.value))
+    console.log(eventStore.getState());
+  }
   
   
   return (
   <>
   <h2>Home</h2>
-  <p>{date.toString()}</p>
-  <p>{daysInMonth.toString()}</p>
+  <form onSubmit={onSubmit}>
+    <input name="textfilter" />
+    <button type="submit">Filter</button>
+  </form>
   </>
 )
 }

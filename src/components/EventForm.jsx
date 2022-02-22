@@ -15,9 +15,6 @@ const EventForm = (props) => {
     endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   }
 
-// ^(?:\d{1,4})(?=($|\/\d{2}))\/\d{2}?(?=(\/\d{2}$|$))
-// ^\d{1,4}(?=($|(\/\d{2}$)|((\/\d{2}){2}$)))
-
   const [title, setTitle] = useState(initialState.title)
   const [body, setBody] = useState(initialState.body)
   const [startDate, setStartDate] = useState(initialState.startDate)

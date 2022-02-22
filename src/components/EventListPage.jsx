@@ -3,12 +3,12 @@ import EventItem from './EventItem';
 import { useSelector } from 'react-redux';
 
 const EventList = () => {
-  const events = useSelector(state => state)
+  const state = useSelector(state => state)
   
   return (
   <>
   <h2>Event List</h2>
-  {events.map(event => (
+  {state.events.map(event => (
     <EventItem {...event} key={event.id} />
   ))}
   </>

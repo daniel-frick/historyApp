@@ -2,7 +2,7 @@ export default (events, {text, startYearFilter, endYearFilter}) => {
   return events.filter(event => {
     const textMatch = event.title.toLowerCase().includes(text.toLowerCase())
     let yearFilter = true;
-    if (startYearFilter && endYearFilter) {
+    if ((startYearFilter && endYearFilter) && (startYearFilter <= endYearFilter)) {
       yearFilter = event.startDate.year >= startYearFilter && event.startDate.year <= endYearFilter
       console.log('with end date')
     }

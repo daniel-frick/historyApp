@@ -3,6 +3,8 @@ import {setTextFilter, setStartYearFilter, setEndYearFilter} from '../store/acti
 import {eventStore} from '../store/store/configStore';
 import {useSelector} from 'react-redux';
 
+let regexFilterDate = /^\d{0,4}$/;
+
 const FilterForm = () => {
 
   const filters = useSelector(state => state.filters)
@@ -22,22 +24,29 @@ const FilterForm = () => {
     </div>
     <label htmlFor="startyearfilter">start year</label>
     <input
-      type="number"
-      value={filters.startYearFilter}
+      type="text"
+      placeholder={'YYYY'}
+      value={filters.startYear}
+      pattern="^\d{0,4}$"
       name="startyearfilter"
       onChange={(e) => {
+        if (e.target.value.match(regexFilterDate)) {
         eventStore.dispatch(setStartYearFilter(+e.target.value))
-        console.log(filters)
+        }
       }}
     />
 
     <label htmlFor="endyearfilter">end year</label>
     <input
-      type="number"
-      value={filters.endYearFilter}
+      type="text"
+      placeholder={'YYYY'}
+      value={filters.endYear}
+      pattern="[0-9]{0,4}$"
       name="endyearfilter"
       onChange={(e) => {
-        eventStore.dispatch(setEndYearFilter(+e.target.value))
+         if (e.target.value.match(regexFilterDate)) {
+           eventStore.dispatch(setEndYearFilter(+e.target.value))
+         }
         console.log(filters)
       }}
     />

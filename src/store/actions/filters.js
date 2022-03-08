@@ -13,3 +13,13 @@ export const setEndYearFilter = (endYearFilter) => ({
   type: 'SET_END_YEAR',
   endYearFilter
 })
+
+export const setJubilee = (period) => ({
+  type: 'SET_JUBILEE',
+  period
+})
+
+export const setVantageYear = (vantageYear) => ({
+  type: 'SET_VANTAGE_YEAR',
+  vantageYear
+})

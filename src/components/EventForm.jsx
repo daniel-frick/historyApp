@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import {getSingleStartDate, getSingleEndDate} from '../utils/displayfunctions';
 const dateFormat = 'YYYY/MM/DD'
@@ -61,6 +61,12 @@ const EventForm = (props) => {
   verifyEndDate(endDate)
   setEndDate(endDate)
   }
+
+  useEffect(() => {
+    verifyStartDate(initialState.startDate);
+    console.log("use effect")
+  },
+  [])
 
   const onSubmit = (e) => {
     e.preventDefault();

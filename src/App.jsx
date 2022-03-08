@@ -9,7 +9,7 @@ const events = ['Normalisierung mit VAE', 'Regierungsbildung Bennett', 'Lapid ü
 
 for (let i = 1; i <= 3; i++) {
   eventStore.dispatch(addEvent({
-  startDate: DateTime.local(2012+i+i,i+5,i),
+  startDate: DateTime.local(1997,i+5,i),
   endDate:DateTime.local(2012+i+i+i,i+7,i+2),
   title: events[i-1],
   body: 'body: ' + i,

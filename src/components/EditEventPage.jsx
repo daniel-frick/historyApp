@@ -8,7 +8,8 @@ import { useSelector } from 'react-redux';
 const EditEventPage = () => {
   let navigate = useNavigate();
   const {id} = useParams()
-  const eventObject= useSelector(state => state).find(eventObject => eventObject.id === id)
+  const events = useSelector(state => state.events)
+  const eventObject = events.find(eventObject => eventObject.id === id)
 
   return (
   <>

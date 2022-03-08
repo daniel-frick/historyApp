@@ -7,6 +7,7 @@ import FilterForm from './FilterForm'
 const EventList = () => {
   const state = useSelector(state => state)
   const selectedEvents = selectEvents(state.events, state.filters)
+
   
   return (
   <>

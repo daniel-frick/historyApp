@@ -5,6 +5,7 @@ export default {
   },
   plugins: [
    '@snowpack/plugin-sass',
+   '@snowpack/plugin-dotenv'
   ],
   routes: [
     {
@@ -13,4 +14,7 @@ export default {
       dest: '/index.html',
     },
   ],
+  env: {
+    NAME:'daniel'
+  }
 }

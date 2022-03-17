@@ -10,7 +10,6 @@ const EventForm = (props) => {
   const initialState = {
     title: props.eventObject ? props.eventObject.title : '',
     body: props.eventObject ? props.eventObject.body : '',
-    notes: 'Links and additional notes',
     startDate: props.eventObject ? getSingleStartDate(props.eventObject) : '',
     endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   }
@@ -64,9 +63,7 @@ const EventForm = (props) => {
 
   useEffect(() => {
     verifyStartDate(initialState.startDate);
-    console.log("use effect")
-  },
-  [])
+  }, [])
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -86,8 +83,8 @@ const EventForm = (props) => {
       props.onSubmit({
         title,
         body,
-        startDate: generatedStartDate,
-        endDate: generatedEndDate,
+        startDate,
+        endDate,
         withStartDay,
         withStartMonth,
         withEndDay,

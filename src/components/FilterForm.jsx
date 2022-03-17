@@ -63,7 +63,6 @@ const FilterForm = () => {
         name="jubilee"
         id="jubilee"
         onChange={(e) => {
-          console.log(+e.target.value)
           eventStore.dispatch(setJubilee(+e.target.value))
         }}
       >
@@ -76,7 +75,6 @@ const FilterForm = () => {
         type="number"
         value={filters.vantageYear}
          onChange={(e) => {
-          console.log(+e.target.value)
           eventStore.dispatch(setVantageYear(+e.target.value))
         }}
         

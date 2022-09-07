@@ -1,25 +1,24 @@
-
-export const setTextFilter = (text) => ({
+export const setTextFilter = text => ({
   type: 'SET_TEXT_FILTER',
-  text
-})
+  text,
+});
 
-export const setStartYearFilter = (startYearFilter) => ({
+export const setStartYearFilter = startYearFilter => ({
   type: 'SET_START_YEAR',
-  startYearFilter
-})
+  startYearFilter,
+});
 
-export const setEndYearFilter = (endYearFilter) => ({
+export const setEndYearFilter = endYearFilter => ({
   type: 'SET_END_YEAR',
-  endYearFilter
-})
+  endYearFilter,
+});
 
-export const setJubilee = (period) => ({
+export const setJubilee = period => ({
   type: 'SET_JUBILEE',
-  period
-})
+  period,
+});
 
-export const setVantageYear = (vantageYear) => ({
+export const setVantageYear = vantageYear => ({
   type: 'SET_VANTAGE_YEAR',
-  vantageYear
-})
+  vantageYear,
+});

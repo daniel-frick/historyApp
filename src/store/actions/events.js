@@ -32,6 +32,7 @@ export const fetchData = () => {
 export const addEvent = ({
   title = '',
   body = '',
+  sortation = '',
   startDate = '',
   endDate = '',
   withStartDay = true,
@@ -45,6 +46,7 @@ export const addEvent = ({
       endDate,
       title,
       body,
+      sortation,
       withStartMonth,
       withStartDay,
       withEndMonth,

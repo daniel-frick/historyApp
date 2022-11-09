@@ -29,7 +29,7 @@ export const fetchData = () => {
 export const addEvent = ({
   title = '',
   body = '',
-  keywordsArray = '',
+  keywords = '',
   startDate = '',
   endDate = '',
   withStartDay = true,
@@ -43,14 +43,13 @@ export const addEvent = ({
       endDate,
       title,
       body,
-      keywordsArray,
+      keywords,
       withStartMonth,
       withStartDay,
       withEndMonth,
       withEndDay,
       added: new Date(),
     };
-    console.log(eventData.keywordsArray);
     const docRef = await addDoc(eventsCollectionRef, eventData);
     const startDateArray = eventData.startDate.split('/').map(e => +e);
     eventData.startDate = DateTime.local(...startDateArray);

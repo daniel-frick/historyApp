@@ -13,14 +13,14 @@ const EventForm = props => {
   const initialState = {
     title: props.eventObject ? props.eventObject.title : '',
     body: props.eventObject ? props.eventObject.body : '',
-    sortation: props.eventObject ? props.eventObject.sortation : '',
+    keywords: props.eventObject ? props.eventObject.keywords : '',
     startDate: props.eventObject ? getSingleStartDate(props.eventObject) : '',
     endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   };
 
   const [title, setTitle] = useState(initialState.title);
   const [body, setBody] = useState(initialState.body);
-  const [sortation, setSortation] = useState(initialState.sortation);
+  const [keywords, setKeywords] = useState(initialState.keywords);
   const [startDate, setStartDate] = useState(initialState.startDate);
   const [endDate, setEndDate] = useState(initialState.endDate);
   const [validStartDate, setValidStartDate] = useState(false);
@@ -52,9 +52,9 @@ const EventForm = props => {
     setBody(body);
   };
 
-  const onSortationChange = e => {
-    const sortation = e.target.value;
-    setSortation(sortation);
+  const onKeywordsChange = e => {
+    const keywords = e.target.value;
+    setKeywords(keywords);
   };
 
   const onStartDateChange = e => {
@@ -75,6 +75,7 @@ const EventForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
+    const keywordsArray = keywords.split(',');
     const startDateArray = startDate.split('/').map(e => +e);
     const endDateArray = endDate
       ? endDate.split('/').map(e => +e)
@@ -97,7 +98,7 @@ const EventForm = props => {
       props.onSubmit({
         title,
         body,
-        sortation,
+        keywordsArray,
         startDate,
         endDate,
         withStartDay,
@@ -129,14 +130,14 @@ const EventForm = props => {
           placeholder={'Add a short description'}
           value={body}
         />
-        <label htmlFor="sortation">Sortation</label>
+        <label htmlFor="keywords">Keywords</label>
         <input
-          onChange={onSortationChange}
+          onChange={onKeywordsChange}
           type="text"
-          name="sortation"
-          id="sortation"
-          placeholder={'Add tags divided by "," to categorize your event'}
-          value={sortation}
+          name="keywords"
+          id="keywords"
+          placeholder={'Add keywords divided by "," to categorize your event'}
+          value={keywords}
         />
         <label htmlFor="startdate">Start date</label>
         <input

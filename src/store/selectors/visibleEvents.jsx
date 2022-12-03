@@ -4,7 +4,6 @@ export default (
 ) => {
   return events.filter(event => {
     let textMatch = event.title.toLowerCase().includes(text.toLowerCase());
-    console.log(textMatch);
     let yearFilter = true;
 
     if (startYearFilter && endYearFilter && startYearFilter <= endYearFilter) {

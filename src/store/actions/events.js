@@ -9,6 +9,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 const eventsCollectionRef = collection(db, 'events');
+const keywordsCollectionRef = collection(db, 'keywords');
 
 export const fetchData = () => {
   return async function (dispatch, getState) {
@@ -22,6 +23,9 @@ export const fetchData = () => {
         : startDateArray;
       event.endDate = DateTime.local(...endDateArray);
     });
+    const keywordsDB = await getDocs(keywordsCollectionRef);
+    const keywordsList = keywordsDB.docs.map(kw => kw.data().keywords);
+    console.log(keywordsList);
     dispatch({ type: 'FETCH_DATA', dataList });
   };
 };
@@ -50,7 +54,6 @@ export const addEvent = ({
       withEndDay,
       added: new Date(),
     };
-    console.log(eventData.keywordsArray);
     const docRef = await addDoc(eventsCollectionRef, eventData);
     const startDateArray = eventData.startDate.split('/').map(e => +e);
     eventData.startDate = DateTime.local(...startDateArray);

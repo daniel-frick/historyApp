@@ -12,12 +12,12 @@ const EventItem = props => {
           {getFullDateString(props)}: {props.title}.
         </b>{' '}
         {props.body}
-        <i>{props.keywords}</i>
       </p>
       <button onClick={() => historyStore.dispatch(deleteEvent(props.id))}>
         Delete
       </button>
       <Link to={`/edit/${props.id}`}>Edit</Link>
+      {props.keywordsArray ? props.keywordsArray : 'no keywords'}
     </div>
   );
 };

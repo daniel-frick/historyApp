@@ -13,7 +13,7 @@ const EventForm = props => {
   const initialState = {
     title: props.eventObject ? props.eventObject.title : '',
     body: props.eventObject ? props.eventObject.body : '',
-    keywords: props.eventObject ? props.eventObject.keywords : '',
+    keywords: props.eventObject ? props.eventObject.keywordsArray : '',
     startDate: props.eventObject ? getSingleStartDate(props.eventObject) : '',
     endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   };
@@ -54,6 +54,7 @@ const EventForm = props => {
 
   const onKeywordsChange = e => {
     const keywords = e.target.value;
+    console.log(keywords);
     setKeywords(keywords);
   };
 
@@ -75,7 +76,8 @@ const EventForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const keywordsArray = keywords.split(',');
+    // const keywordsArray = keywords.split(',');
+    const keywordsArray = keywords;
     const startDateArray = startDate.split('/').map(e => +e);
     const endDateArray = endDate
       ? endDate.split('/').map(e => +e)

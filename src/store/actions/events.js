@@ -25,7 +25,6 @@ export const fetchData = () => {
     });
     const keywordsDB = await getDocs(keywordsCollectionRef);
     const keywordsList = keywordsDB.docs.map(kw => kw.data().keywords);
-    console.log(keywordsList);
     dispatch({ type: 'FETCH_DATA', dataList });
   };
 };
@@ -68,6 +67,10 @@ export const addEvent = ({
         ...eventData,
       },
     });
+    // dispatch({
+    //   type: 'CHECK_KEYWORD',
+    //   keywordsArray: eventData.keywordsArray,
+    // });
   };
 };
 
@@ -85,6 +88,10 @@ export const editEvent = (id, updates) => {
       type: 'EDIT_EVENT',
       id,
       updates,
+    });
+    dispatch({
+      type: 'CHECK_KEYWORD',
+      keywordsArray: updates.keywordsArray,
     });
   };
 };

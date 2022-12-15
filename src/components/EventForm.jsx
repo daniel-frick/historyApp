@@ -54,7 +54,6 @@ const EventForm = props => {
 
   const onKeywordsChange = e => {
     const keywords = e.target.value;
-    console.log(keywords);
     setKeywords(keywords);
   };
 

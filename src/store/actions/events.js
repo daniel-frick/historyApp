@@ -26,6 +26,7 @@ export const fetchData = () => {
     const keywordsDB = await getDocs(keywordsCollectionRef);
     const keywordsList = keywordsDB.docs.map(kw => kw.data().keywords);
     dispatch({ type: 'FETCH_DATA', dataList });
+    dispatch({ type: 'FETCH_KEYWORDS', keywordsList });
   };
 };
 
@@ -76,8 +77,12 @@ export const addEvent = ({
 
 export const editEvent = (id, updates) => {
   return async function (dispatch, getState) {
-    const itemToDelete = doc(db, 'events', id);
-    await updateDoc(itemToDelete, updates);
+    console.log(updates);
+    const itemToUpdate = doc(db, 'events', id);
+    const keywordsFromDB = doc(db, 'keywords', 'rdzndRjGxv3fxSlZaxdK');
+    await updateDoc(itemToUpdate, updates);
+
+    // await updateDoc(keywordsArray, updates.keywordsArray);
     const startDateArray = updates.startDate.split('/').map(e => +e);
     updates.startDate = DateTime.local(...startDateArray);
     const endDateArray = updates.endDate

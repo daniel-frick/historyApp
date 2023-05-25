@@ -11,11 +11,11 @@ import {
 const eventsCollectionRef = collection(db, 'events');
 const keywordsCollectionRef = collection(db, 'keywords');
 
-export const fetchData = () => {
+export const fetchEvents = () => {
   return async function (dispatch, getState) {
-    const data = await getDocs(eventsCollectionRef);
-    const dataList = data.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-    dataList.forEach(event => {
+    const events = await getDocs(eventsCollectionRef);
+    const eventsList = events.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    eventsList.forEach(event => {
       const startDateArray = event.startDate.split('/').map(e => +e);
       event.startDate = DateTime.local(...startDateArray);
       const endDateArray = event.endDate
@@ -23,10 +23,7 @@ export const fetchData = () => {
         : startDateArray;
       event.endDate = DateTime.local(...endDateArray);
     });
-    const keywordsDB = await getDocs(keywordsCollectionRef);
-    const keywordsList = keywordsDB.docs.map(kw => kw.data().keywords);
-    dispatch({ type: 'FETCH_DATA', dataList });
-    dispatch({ type: 'FETCH_KEYWORDS', keywordsList });
+    dispatch({ type: 'FETCH_EVENT', eventsList });
   };
 };
 
@@ -61,6 +58,7 @@ export const addEvent = ({
       ? eventData.endDate.split('/').map(e => +e)
       : startDateArray;
     eventData.endDate = DateTime.local(...endDateArray);
+
     dispatch({
       type: 'ADD_EVENT',
       eventData: {
@@ -68,18 +66,14 @@ export const addEvent = ({
         ...eventData,
       },
     });
-    // dispatch({
-    //   type: 'CHECK_KEYWORD',
-    //   keywordsArray: eventData.keywordsArray,
-    // });
   };
 };
 
 export const editEvent = (id, updates) => {
   return async function (dispatch, getState) {
-    console.log(updates);
     const itemToUpdate = doc(db, 'events', id);
-    const keywordsFromDB = doc(db, 'keywords', 'rdzndRjGxv3fxSlZaxdK');
+    // const keywordsFromDB = doc(db, 'keywords', 'rdzndRjGxv3fxSlZaxdK');
+
     await updateDoc(itemToUpdate, updates);
 
     // await updateDoc(keywordsArray, updates.keywordsArray);
@@ -94,10 +88,10 @@ export const editEvent = (id, updates) => {
       id,
       updates,
     });
-    dispatch({
-      type: 'CHECK_KEYWORD',
-      keywordsArray: updates.keywordsArray,
-    });
+    // dispatch({
+    //   type: 'CHECK_KEYWORD',
+    //   keywordsArray: updates.keywordsArray,
+    // });
   };
 };
 

@@ -1,4 +1,5 @@
 import React from 'React';
+import Keyword from './Keyword';
 import { deleteEvent } from '../store/actions/events';
 import { historyStore } from '../store/store/configStore';
 import { Link } from 'react-router-dom';
@@ -17,7 +18,11 @@ const EventItem = props => {
         Delete
       </button>
       <Link to={`/edit/${props.id}`}>Edit</Link>
-      {props.keywordsArray ? props.keywordsArray : 'no keywords'}
+      <div className="event-keywords">
+        {props.keywordsArray.map((kw, id) => {
+          return <Keyword keyword={kw} key={id} />;
+        })}
+      </div>
     </div>
   );
 };

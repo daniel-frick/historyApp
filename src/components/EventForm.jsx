@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import Keyword from './Keyword';
 import { DateTime } from 'luxon';
 import {
   getSingleStartDate,
   getSingleEndDate,
 } from '../utils/displayfunctions';
+
+import { compareKeywords } from '../utils/handleKeywords';
+
 const dateFormat = 'YYYY/MM/DD';
 let regexDateFormat = /^\d{1,4}(?=($|(\/\d{2}$)|((\/\d{2}){2}$)))/;
 
@@ -13,10 +17,14 @@ const EventForm = props => {
   const initialState = {
     title: props.eventObject ? props.eventObject.title : '',
     body: props.eventObject ? props.eventObject.body : '',
-    keywords: props.eventObject ? props.eventObject.keywordsArray : '',
+    keywords: props.eventObject
+      ? props.eventObject.keywordsArray.toString()
+      : '',
     startDate: props.eventObject ? getSingleStartDate(props.eventObject) : '',
     endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   };
+
+  const initialKW = initialState.keywords.split(',');
 
   const [title, setTitle] = useState(initialState.title);
   const [body, setBody] = useState(initialState.body);
@@ -45,6 +53,7 @@ const EventForm = props => {
   const onTitleChange = e => {
     const title = e.target.value;
     setTitle(title);
+    return title;
   };
 
   const onBodyChange = e => {
@@ -73,13 +82,12 @@ const EventForm = props => {
     verifyStartDate(initialState.startDate);
   }, []);
 
-  const onSubmit = e => {
+  const prepareDataForSubmit = e => {
     e.preventDefault();
-    // const keywordsArray = keywords.split(',');
-    const keywordsArray = keywords;
-    const startDateArray = startDate.split('/').map(e => +e);
+    const keywordsArray = keywords.split(',').map(d => d.trim());
+    const startDateArray = startDate.split('/').map(d => +d);
     const endDateArray = endDate
-      ? endDate.split('/').map(e => +e)
+      ? endDate.split('/').map(d => +d)
       : startDateArray;
     const withStartDay = startDateArray.length === 3;
     const withStartMonth = startDateArray.length >= 2;
@@ -87,8 +95,12 @@ const EventForm = props => {
     const withEndMonth = endDateArray.length >= 2;
     const generatedStartDate = DateTime.local(...startDateArray);
     const generatedEndDate = DateTime.local(...endDateArray);
+
+    const keywordsToAdd = compareKeywords(initialKW, keywordsArray).toAdd;
+    const keywordsToDelete = compareKeywords(initialKW, keywordsArray).toDelete;
+
     if (!generatedStartDate.isValid || !generatedEndDate.isValid) {
-      setError('you have entered invalid date format, please check again');
+      setError('you have entered an invalid date format, please check again');
     } else if (
       generatedStartDate.startOf('day') > generatedEndDate.startOf('day')
     ) {
@@ -106,13 +118,15 @@ const EventForm = props => {
         withStartMonth,
         withEndDay,
         withEndMonth,
+        keywordsToAdd,
+        keywordsToDelete,
       });
     }
   };
 
   return (
     <>
-      <form className="formfields" onSubmit={onSubmit}>
+      <form className="formfields" onSubmit={prepareDataForSubmit}>
         <label htmlFor="title">Title</label>
         <input
           onChange={onTitleChange}
@@ -131,6 +145,9 @@ const EventForm = props => {
           placeholder={'Add a short description'}
           value={body}
         />
+        {initialKW.map((kw, id) => (
+          <Keyword keyword={kw} key={id} />
+        ))}
         <label htmlFor="keywords">Keywords</label>
         <input
           onChange={onKeywordsChange}

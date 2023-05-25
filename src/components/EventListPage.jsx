@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import selectEvents from '../store/selectors/visibleEvents';
 import FilterForm from './FilterForm';
 import { historyStore } from '../store/store/configStore';
-import { fetchData } from '../store/actions/events';
+import { fetchEvents } from '../store/actions/events';
 
 const EventList = () => {
   // const env = import.meta.env;

@@ -7,12 +7,15 @@ import Navigation from '../components/Navigation';
 import Header from '../components/Header';
 import EditEventPage from '../components/EditEventPage';
 import { historyStore } from '../store/store/configStore';
-import { fetchData } from '../store/actions/events';
+import { fetchEvents } from '../store/actions/events';
+import { fetchKeywords } from '../store/actions/keywords';
 
 const AppRouter = () => {
   useEffect(() => {
-    console.log('fetching data on start');
-    historyStore.dispatch(fetchData());
+    console.log('fetching events on start');
+    historyStore.dispatch(fetchEvents());
+    console.log('fetching keywords on start');
+    historyStore.dispatch(fetchKeywords());
   }, []);
 
   // const state = useSelector(state => state.events)

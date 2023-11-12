@@ -15,6 +15,7 @@ export const fetchEvents = () => {
   return async function (dispatch, getState) {
     const events = await getDocs(eventsCollectionRef);
     const eventsList = events.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+
     eventsList.forEach(event => {
       const startDateArray = event.startDate.split('/').map(e => +e);
       event.startDate = DateTime.local(...startDateArray);
@@ -23,7 +24,8 @@ export const fetchEvents = () => {
         : startDateArray;
       event.endDate = DateTime.local(...endDateArray);
     });
-    dispatch({ type: 'FETCH_EVENT', eventsList });
+
+    dispatch({ type: 'FETCH_EVENTS', eventsList });
   };
 };
 

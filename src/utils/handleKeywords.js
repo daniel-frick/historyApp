@@ -1,5 +1,4 @@
-export const keywordInState = (newKW, kwStorage) => {
-  console.log('gotcha');
+export const updateGeneralKeywordState = (newKW, kwStorage) => {
   const index = kwStorage.findIndex(oldEntry => oldEntry.keyword == newKW);
 
   if (index > -1) {

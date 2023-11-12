@@ -20,9 +20,13 @@ const EventList = () => {
   // const state = historyStore.getState();
   // console.log(state);
 
-  const state = useSelector(state => state);
+  const stateEvents = useSelector(state => state.events);
+  const stateFilters = useSelector(state => state.filters);
+  const stateKeywords = useSelector(state => state.keywords);
 
-  const selectedEvents = selectEvents(state.events, state.filters);
+  console.log(stateKeywords);
+
+  const selectedEvents = selectEvents(stateEvents, stateFilters);
   return (
     <>
       <h2>Event List</h2>

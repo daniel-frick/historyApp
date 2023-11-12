@@ -2,7 +2,7 @@ const eventsDefaultState = [];
 
 export default (state = eventsDefaultState, action) => {
   switch (action.type) {
-    case 'FETCH_EVENT':
+    case 'FETCH_EVENTS':
       return state.concat(action.eventsList);
     case 'ADD_EVENT':
       return state.concat(action.eventData);

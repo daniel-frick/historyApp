@@ -18,13 +18,14 @@ const EventForm = props => {
     title: props.eventObject ? props.eventObject.title : '',
     body: props.eventObject ? props.eventObject.body : '',
     keywords: props.eventObject
-      ? props.eventObject.keywordsArray.toString()
+      ? props.eventObject.keywordsArray.toString().replaceAll(',', ', ')
       : '',
     startDate: props.eventObject ? getSingleStartDate(props.eventObject) : '',
     endDate: props.eventObject ? getSingleEndDate(props.eventObject) : '',
   };
 
-  const initialKW = initialState.keywords.split(',');
+  const initialKW = initialState.keywords.split(',').map(kw => kw.trim());
+  console.log(initialKW);
 
   const [title, setTitle] = useState(initialState.title);
   const [body, setBody] = useState(initialState.body);

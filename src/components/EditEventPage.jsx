@@ -9,15 +9,14 @@ import EventForm from './EventForm';
 import { historyStore } from '../store/store/configStore';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { keywordInState } from '../utils/handleKeywords';
+import { updateGeneralKeywordState } from '../utils/handleKeywords';
 
 const EditEventPage = () => {
   let navigate = useNavigate();
   const { id } = useParams();
   const events = useSelector(state => state.events);
   const stateKeywords = useSelector(state => state.keywords);
-  console.log(stateKeywords);
-  const eventObject = events.find(eventObject => eventObject.id === id);
+  const eventObject = events.find(event => event.id === id);
 
   return (
     <>
@@ -30,7 +29,10 @@ const EditEventPage = () => {
           if (data.keywordsToAdd.length > 0) {
             const keywordsToAdd = data.keywordsToAdd;
             keywordsToAdd.map(kw => {
-              const kwInState = keywordInState(keywordsToAdd, stateKeywords);
+              const kwInState = updateGeneralKeywordState(
+                keywordsToAdd,
+                stateKeywords
+              );
               if (kwInState) {
                 historyStore.dispatch(updateKeyword(kw));
               } else {

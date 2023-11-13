@@ -26,8 +26,7 @@ export const addKeyword = kw => {
   return async function (dispatch, getState) {
     // const keywordsDB = await getDocs(keywordsCollectionRef);
     // const keywordsDBlist = keywordsDB.docs.map(kw => kw.data());
-    console.log('received dispatch to ADD kw: ' + kw);
-
+    // console.log('received dispatch to ADD kw: ' + kw);
     // dispatch({
     //   type: 'ADD_KEYWORDS_TO_STATE',
     //   newKWdbList,
@@ -35,9 +34,12 @@ export const addKeyword = kw => {
   };
 };
 
-export const updateKeyword = kw => {
+export const updateKeyword = (id, updates) => {
   return async function (dispatch, getState) {
-    console.log('received dispatch to UDPATE kw: ' + kw);
+    const keywordToUpdate = doc(db, 'keywords', id);
+    await updateDoc(keywordToUpdate, updates);
+
+    dispatch({ type: 'UPDATE_KEYWORD', id, updates });
   };
 };
 

@@ -1,11 +1,9 @@
-export const updateGeneralKeywordState = (newKW, kwStorage) => {
+export const compareWithGeneralKeywordState = (newKW, kwStorage) => {
   const index = kwStorage.findIndex(oldEntry => oldEntry.keyword == newKW);
 
   if (index > -1) {
-    console.log('KW found, increasing number');
-    return true;
+    return kwStorage[index];
   } else {
-    console.log('new KW, adding to list');
     return false;
   }
 };

@@ -74,7 +74,6 @@ export const addEvent = ({
 export const editEvent = (id, updates) => {
   return async function (dispatch, getState) {
     const itemToUpdate = doc(db, 'events', id);
-    // const keywordsFromDB = doc(db, 'keywords', 'rdzndRjGxv3fxSlZaxdK');
 
     await updateDoc(itemToUpdate, updates);
 

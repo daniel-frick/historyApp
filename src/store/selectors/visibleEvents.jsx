@@ -13,7 +13,6 @@ export default (
     } else if (startYearFilter && !endYearFilter) {
       yearFilter = event.startDate.year >= startYearFilter;
     } else if (endYearFilter && !startYearFilter) {
-      console.log('only endyear filter');
       yearFilter = event.startDate.year <= endYearFilter;
     } else if (jubilee > 0)
       yearFilter = vantageYear - event.startDate.year === jubilee;

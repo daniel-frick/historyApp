@@ -18,8 +18,6 @@ const EditEventPage = () => {
   const stateKeywords = useSelector(state => state.keywords);
   const eventObject = events.find(event => event.id === id);
 
-  console.log(stateKeywords);
-
   return (
     <>
       <h3>Edit event</h3>
@@ -38,15 +36,35 @@ const EditEventPage = () => {
                   ...kwToAdd,
                   count: newCount,
                 };
-                console.log(updates);
-                console.log(kwToAdd.id);
                 historyStore.dispatch(updateKeyword(kwToAdd.id, updates));
               } else {
-                console.log('new kw found');
-                // historyStore.dispatch(addKeyword(kw));
+                historyStore.dispatch(addKeyword(kw));
               }
             });
           }
+          if (data.keywordsToDelete.length > 0) {
+            data.keywordsToDelete.map(kwToDelete => {
+              // finde im stateKW den richtigen Eintrag
+              const index = stateKeywords.findIndex(
+                oldEntry => oldEntry.keyword == kwToDelete
+              );
+              const foundKeyword = stateKeywords[index];
+              // if count is 1, delete entry
+
+              if (foundKeyword.count == 1) {
+                historyStore.dispatch(deleteKeyword(foundKeyword));
+                // if count is > 1, reduce count by 1
+              } else {
+                const newCount = foundKeyword.count - 1;
+                const updates = {
+                  ...foundKeyword,
+                  count: newCount,
+                };
+                historyStore.dispatch(updateKeyword(foundKeyword.id, updates));
+              }
+            });
+          }
+
           navigate('/list');
         }}
       />

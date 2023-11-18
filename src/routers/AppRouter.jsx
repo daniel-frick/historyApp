@@ -12,19 +12,10 @@ import { fetchKeywords } from '../store/actions/keywords';
 
 const AppRouter = () => {
   useEffect(() => {
-    console.log('fetching events on start');
     historyStore.dispatch(fetchEvents());
-    console.log('fetching keywords on start');
+
     historyStore.dispatch(fetchKeywords());
   }, []);
-
-  // const state = useSelector(state => state.events)
-
-  // useEffect(() => {
-  //   console.log('fetching data on state change');
-  //   eventStore.dispatch(fetchData())
-  //   console.log('data fetched on state change');
-  // }, [state]);
 
   return (
     <BrowserRouter>

@@ -25,7 +25,6 @@ const EventForm = props => {
   };
 
   const initialKW = initialState.keywords.split(',').map(kw => kw.trim());
-  console.log('initial keyword' + initialKW);
 
   const [title, setTitle] = useState(initialState.title);
   const [body, setBody] = useState(initialState.body);

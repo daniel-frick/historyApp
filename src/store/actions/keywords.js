@@ -46,8 +46,13 @@ export const updateKeyword = (id, updates) => {
   };
 };
 
-export const deleteKeyword = kw => {
+export const deleteKeyword = id => {
   return async function (dispatch, getState) {
-    console.log('kw to to DELETE kw: ' + kw);
+    const itemToDelete = doc(db, 'keywords', id);
+    await deleteDoc(itemToDelete);
+    dispatch({
+      type: 'DELETE_EVENT',
+      id,
+    });
   };
 };

@@ -23,6 +23,8 @@ const EventList = () => {
   const stateFilters = useSelector(state => state.filters);
   const stateKeywords = useSelector(state => state.keywords);
 
+  console.log(stateKeywords);
+
   const selectedEvents = selectEvents(stateEvents, stateFilters);
   return (
     <>

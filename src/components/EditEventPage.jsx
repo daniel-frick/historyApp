@@ -44,7 +44,6 @@ const EditEventPage = () => {
           }
           if (data.keywordsToDelete.length > 0) {
             data.keywordsToDelete.map(kwToDelete => {
-              // finde im stateKW den richtigen Eintrag
               const index = stateKeywords.findIndex(
                 oldEntry => oldEntry.keyword == kwToDelete
               );

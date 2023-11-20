@@ -19,16 +19,17 @@ const AddEventPage = () => {
 
           if (data.keywordsArray.length > 0) {
             data.keywordsArray.map(kw => {
-              if (!stateKeywords.includes(kw)) {
-                historyStore.dispatch(addKeyword(kw));
-              } else {
-                const kwAlreadyThere = compareWithGeneralKeywordState(
-                  kw,
-                  stateKeywords
-                );
+              const index = stateKeywords.findIndex(
+                oldEntry => oldEntry.keyword == kw
+              );
 
-                console.log(kwAlreadyThere);
+              console.log(stateKeywords);
 
+              console.log(index);
+
+              if (index > -1) {
+                console.log('keyword found: ' + kw);
+                let kwAlreadyThere = stateKeywords[index];
                 let newCount = kwAlreadyThere.count + 1;
                 const updates = {
                   ...kwAlreadyThere,
@@ -38,11 +39,13 @@ const AddEventPage = () => {
                 historyStore.dispatch(
                   updateKeyword(kwAlreadyThere.id, updates)
                 );
+              } else {
+                console.log('adding new kw: ' + kw);
+                historyStore.dispatch(addKeyword(kw));
               }
             });
+            navigate('/list');
           }
-
-          navigate('/list');
         }}
       />
     </>

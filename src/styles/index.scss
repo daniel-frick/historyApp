@@ -34,3 +34,21 @@ body {
 .error {
   color: indianred;
 }
+
+.main_navigation {
+  padding:10px;
+  border-color:1px solid hotpink;
+}
+
+.main_navigation a {
+  background-color:CornflowerBlue;
+  padding:5px;
+  color:lightcyan;
+  margin:10px;
+  text-decoration: none;
+  transition: all 300ms ease;
+}
+
+.main_navigation a:hover {
+  background-color: RoyalBlue;
+}
